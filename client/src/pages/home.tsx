@@ -201,7 +201,7 @@ export default function Home() {
         <i className="fas fa-plus text-lg"></i>
       </button>
 
-      <BottNav activeTab="home" />
+      <BottomNav activeTab="home" />
       
       {showPostModal && (
         <PostModal 
