@@ -1,9 +1,11 @@
 const CACHE_NAME = 'expertvoice-v1';
 const urlsToCache = [
   '/',
-  '/static/js/bundle.js',
-  '/static/css/main.css',
-  '/manifest.json'
+  '/src/main.jsx',
+  '/src/index.css',
+  '/manifest.json',
+  'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css',
+  'https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap'
 ];
 
 self.addEventListener('install', (event) => {
@@ -19,7 +21,8 @@ self.addEventListener('fetch', (event) => {
       .then((response) => {
         // Return cached version or fetch from network
         return response || fetch(event.request);
-      })
+      }
+    )
   );
 });
 
@@ -34,30 +37,5 @@ self.addEventListener('activate', (event) => {
         })
       );
     })
-  );
-});
-
-// Push notification handling
-self.addEventListener('push', (event) => {
-  const options = {
-    body: event.data ? event.data.text() : 'New activity in ExpertVoice',
-    icon: '/icon-192x192.png',
-    badge: '/icon-72x72.png',
-    vibrate: [200, 100, 200],
-    data: {
-      url: '/'
-    }
-  };
-
-  event.waitUntil(
-    self.registration.showNotification('ExpertVoice', options)
-  );
-});
-
-self.addEventListener('notificationclick', (event) => {
-  event.notification.close();
-  
-  event.waitUntil(
-    clients.openWindow(event.notification.data.url || '/')
   );
 });

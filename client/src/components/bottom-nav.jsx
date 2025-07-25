@@ -1,8 +1,4 @@
-interface BottomNavProps {
-  activeTab: 'home' | 'explore' | 'experts' | 'profile';
-}
-
-export function BottomNav({ activeTab }: BottomNavProps) {
+export function BottomNav({ activeTab }) {
   const navItems = [
     { id: 'home', label: 'Home', icon: 'fas fa-home', path: '/' },
     { id: 'explore', label: 'Explore', icon: 'fas fa-compass', path: '/explore' },
